@@ -1,0 +1,19 @@
+.login-page {
+	background-image:url('../images/landing.jpg');
+	background-size: cover;
+	background-position: center;
+}
+
+.login {
+	width: 400px;
+	height: 260px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -195px;
+	margin-left: -210px;
+	padding: 20px;
+	background-color: #cccccc;
+	border-radius: 5px;
+	box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}

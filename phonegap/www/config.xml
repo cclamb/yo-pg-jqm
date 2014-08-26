@@ -2,15 +2,11 @@
 <widget id="com.phonegap.helloworld" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>HelloWorld</name>
     <description>
-        Hello World sample application that responds to the deviceready event.
+        
     </description>
     <author email="support@phonegap.com" href="http://phonegap.com">
         PhoneGap Team
     </author>
-    <!-- <gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" /> -->
-    <gap:plugin name="org.apache.cordova.statusbar" />
-    <preference name="StatusBarOverlaysWebView" value="false" />
-    <preference name="StatusBarStyle" value="lightcontent" />
 
     <preference name="permissions" value="none" />
     <preference name="phonegap-version" value="3.5.0" />
@@ -28,7 +24,22 @@
     <preference name="disable-cursor" value="false" />
     <preference name="android-minSdkVersion" value="7" />
     <preference name="android-installLocation" value="auto" />
-    <gap:plugin name="org.apache.cordova.battery-status" />
+
+    <!-- 
+        Some combination of these are needed to deal with a phonegap
+        status bar display bug: https://github.com/phonegap/build/issues/293
+        The phonegap developer app continues to display this though.
+    --> 
+    <!-- <gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" /> -->
+    <gap:plugin name="org.apache.cordova.statusbar" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="StatusBarStyle" value="lightcontent" />
+    <!--
+        These are various plugins that we could use but
+        are not currently using.  To use, we woulnd need to configure
+        here and in the Gruntfile.js task file.
+    -->
+    <!-- <gap:plugin name="org.apache.cordova.battery-status" />
     <gap:plugin name="org.apache.cordova.camera" />
     <gap:plugin name="org.apache.cordova.media-capture" />
     <gap:plugin name="org.apache.cordova.console" />
@@ -46,6 +57,13 @@
     <gap:plugin name="org.apache.cordova.network-information" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="org.apache.cordova.vibration" />
+    -->
+
+    <!--
+        This section lists various icons that are currently unused
+        and undefined.
+    -->
+    <!--
     <icon src="icon.png" />
     <icon gap:platform="android" gap:qualifier="ldpi" src="res/icon/android/icon-36-ldpi.png" />
     <icon gap:platform="android" gap:qualifier="mdpi" src="res/icon/android/icon-48-mdpi.png" />
@@ -70,6 +88,6 @@
     <gap:splash gap:platform="ios" height="1136" src="res/screen/ios/screen-iphone-portrait-568h-2x.png" width="640" />
     <gap:splash gap:platform="ios" height="1024" src="res/screen/ios/screen-ipad-portrait.png" width="768" />
     <gap:splash gap:platform="ios" height="768" src="res/screen/ios/screen-ipad-landscape.png" width="1024" />
-    <gap:splash gap:platform="winphone" src="res/screen/windows-phone/screen-portrait.jpg" />
+    <gap:splash gap:platform="winphone" src="res/screen/windows-phone/screen-portrait.jpg" /> -->
     <access origin="*" />
 </widget>
