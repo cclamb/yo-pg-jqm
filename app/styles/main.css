@@ -16,6 +16,12 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
+ /*
+  * This is the original stylesheet that accompanies the stock
+  * cordova page that is initially created via yeoman.  Kept as
+  * a future possible reference.
+  */
 * {
     -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
 }
