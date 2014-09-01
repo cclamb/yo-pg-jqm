@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>watsco proposal center | login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/lib/jquery.mobile-1.4.3.css" />
+    <link rel="stylesheet" href="styles/watsco.css">
+    <!-- endbuild -->
+    <!-- build:js scripts/index.js -->
+    <script src="scripts/lib/jquery-1.10.2.min.js"></script>
+    <script src="scripts/lib/jquery.mobile-1.4.3.js"></script>
+    <!-- endbuild -->
+    <!-- NOTE: this depends on the panels defined in index.html.  That file *must* load first.  -->
+  </head>
+
+  <body>
+  <div data-role="page" id="customers" data-title="customers">
+
+    <div data-role="header" data-position="fixed">
+      <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Home</a>
+      <h1>customers</h1>
+      <a href="#add-form" data-icon="gear" data-iconpos="notext">About</a>
+    </div>
+
+    <div data-role="content">
+
+      <ul data-role="listview" 
+        data-inset="true" 
+        data-autodividers="true"
+        data-filter="true">
+        <li><a href="#details">Adams, Samuel (Sam)</a></li>
+        <li><a href="#details">Beam, James</a></li>
+        <li><a href="#details">Heileman, Greg</a></li>
+        <li><a href="#details">Hickman, Micheal</a></li>
+        <li><a href="#details">Kozlick, Jarred</a></li>
+        <li><a href="#details">Lamb, Chris</a></li>
+        <li><a href="#details">Laprosithe, Amanda</a></li>
+        <li><a href="#details">Lazar, Annabele (Ann)</a></li>
+        <li><a href="#details">Smith, Samuel (Sam)</a></li>
+        <li><a href="#details">Zapateca, Jesus</a></li>
+      </ul>
+
+    </div>
+
+  </div>
+
+  <script type="text/javascript" src="cordova.js"></script>
+
+  </body>
+</html>
