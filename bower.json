@@ -1,7 +1,9 @@
 {
-  "name": "jquery-mobile",
-  "version": "0.0.0",
+  "name": "Phonegap / JQUery Mobile Testbed",
+  "version": "0.0.1",
   "dependencies": {
-  }
+    "jsviews": "~1.0.0-alpha",
+    "jquery-mobile": "~1.4.3"
+  },
+  "private": "true"
 }
-

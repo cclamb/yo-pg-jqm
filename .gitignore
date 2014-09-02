@@ -26,6 +26,9 @@ build/Release
 # Local node mogules
 node_modules
 
+# Local bower modules
+bower_components
+
 # distribution builds
 dist
 
