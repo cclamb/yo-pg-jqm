@@ -27,16 +27,22 @@
 
   <script>
 
-    var data = {
+    var data = [
+    {
       firstname: 'Samuel',
       lastname: 'Smith',
       nickname: 'Sam'
-    };
+    },
+    {
+      firstname: 'James',
+      lastname: 'Beam',
+      nickname: 'Jim'
+    }
+    ];
 
   </script>
 
   <script id="theTmpl" type="text/x-jsrender">
-    <ul data-role="listview" data-inset="true" data-filter="true">
       <li>
         <a href="details.html">
         {^{:lastname}}, {^{:firstname}}
@@ -45,7 +51,6 @@
         {{/if}}
         </a>
       </li>
-    </ul>
   </script>
 
   <script id="theEditTmpl" type="text/x-jsrender">
@@ -66,7 +71,13 @@
         <a href="#add-form" data-icon="gear" data-iconpos="notext">About</a>
       </div>
 
-      <div id ="result" data-role="content"></div>
+      <div data-role="content">
+        <ul id="result" 
+          data-role="listview" 
+          data-inset="true" 
+          data-filter="true">
+        </ul>
+      </div>
       
     </div>
 
@@ -74,8 +85,12 @@
 
       <ul data-role="listview">
         <li><a href="customers.html">customers</a></li>
-        <li><a href="pending-proposals.html">pending proposals</a></li>
-        <li><a href="completed-proposals.html">completed proposals</a></li>
+        <li>
+          <a href="pending-proposals.html">pending proposals</a>
+        </li>
+        <li>
+          <a href="completed-proposals.html">completed proposals</a>
+        </li>
       </ul>
 
     </div>
