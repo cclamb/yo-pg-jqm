@@ -10,9 +10,16 @@
     <!-- build:js scripts/index.js -->
     <script src="scripts/lib/jquery-1.10.2.min.js"></script>
     <script src="scripts/lib/jquery.mobile-1.4.3.js"></script>
+    <script src="bower_components/jsviews/jsviews.js"></script>
     <!-- endbuild -->
     <!-- NOTE: this depends on the panels defined in index.html.  That file *must* load first.  -->
   </head>
+
+  <script id="details-template" type="text/x-jsrender">
+    <input data-link="firstname trigger=true"/>
+    <input data-link="lastname trigger=true"/>
+    <input data-link="nickname trigger=true"/>
+  </script>
 
   <body>
     
@@ -23,17 +30,15 @@
       <h1>customers | details</h1>
     </div>
 
-    <div data-role="content">
-      <p>Details.</p>
-    </div>
-
-    <div data-role="footer" data-position="fixed">
-      <a href="#contact" data-icon="phone" data-transition="flip" data-iconpos="notext">Contact</a>
-      <a href="#credits" data-icon="info" data-transition="flip" data-iconpos="notext">Credits</a>
-      <small>Copyright SomeCorp &copy; 2014</small>
+    <div id="details-container" data-role="content">
     </div>
     
-</div>
+  </div>
+
+  <script>
+    var detailsTemplate = $.templates('#details-template');
+    detailsTemplate.link('#details-container', data[0]);
+  </script>
 
   <script type="text/javascript" src="cordova.js"></script>
 

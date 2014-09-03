@@ -28,35 +28,39 @@
   <script>
 
     var data = [
-    {
-      firstname: 'Samuel',
-      lastname: 'Smith',
-      nickname: 'Sam'
-    },
-    {
-      firstname: 'James',
-      lastname: 'Beam',
-      nickname: 'Jim'
-    }
+      {
+        firstname: 'Samuel',
+        lastname: 'Smith',
+        nickname: 'Sam'
+      },
+      {
+        firstname: 'James',
+        lastname: 'Beam',
+        nickname: 'Jim'
+      }
     ];
 
   </script>
 
   <script id="theTmpl" type="text/x-jsrender">
-      <li>
-        <a href="details.html">
+    <li>
+      <a href="#details" data-rel="dialog">
         {^{:lastname}}, {^{:firstname}}
         {^{if nickname}}
           (<em data-link="nickname"></em>)
         {{/if}}
-        </a>
-      </li>
+      </a>
+    </li>
   </script>
 
   <script id="theEditTmpl" type="text/x-jsrender">
-      <input data-link="firstname trigger=true"/>
-      <input data-link="lastname trigger=true"/>
-      <input data-link="nickname trigger=true"/>
+
+  </script>
+
+  <script id="details-template" type="text/x-jsrender">
+    <input data-link="firstname trigger=true"/>
+    <input data-link="lastname trigger=true"/>
+    <input data-link="nickname trigger=true"/>
   </script>
 
   <body>
@@ -75,7 +79,8 @@
         <ul id="result" 
           data-role="listview" 
           data-inset="true" 
-          data-filter="true">
+          data-filter="true"
+          data-filter-placeholder="search dudes...">
         </ul>
       </div>
       
@@ -103,12 +108,27 @@
 
     </div>
 
+    <div data-role="page" id="details" data-title="customers | details">
+
+      <div data-role="header" data-position="fixed">
+        <h1>customers | details</h1>
+      </div>
+
+      <div id="details-container" 
+        data-role="content">
+      </div>
+      
+    </div>
+
     <script>
       var displayTemplate = $.templates('#theTmpl');
       displayTemplate.link('#result', data);
 
       var editTemplate = $.templates('#theEditTmpl');
       editTemplate.link('#add-form', data);
+
+      var detailsTemplate = $.templates('#details-template');
+      detailsTemplate.link('#details-container', data[0]);
     </script>
 
   </body>
