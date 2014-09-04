@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>watsco proposal center | login</title>
+    <meta 
+      name="viewport" 
+      content="width=device-width, initial-scale=1">
+    <!-- build:css(.tmp) styles/main.css -->
+    <link 
+      rel="stylesheet" 
+      href="styles/lib/jquery.mobile-1.4.3.css" />
+    <link 
+      rel="stylesheet" 
+      href="styles/watsco.css">
+    <!-- endbuild -->
+    <!-- build:js scripts/index.js -->
+    <script src="scripts/lib/jquery-1.10.2.min.js"></script>
+    <script src="scripts/lib/jquery.mobile-1.4.3.js"></script>
+    <script src="bower_components/handlebars/handlebars.js"></script>
+    <!-- endbuild -->
+    <script id="panel-init">
+      $(function () {
+        $("body>[data-role='panel']").panel().enhanceWithin();
+      });
+    </script>
+  </head>
+
+  <script>
+
+    var data = [
+      {
+        firstname: 'Samuel',
+        lastname: 'Smith',
+        nickname: 'Sam'
+      },
+      {
+        firstname: 'James',
+        lastname: 'Beam',
+        nickname: 'Jim'
+      }
+    ];
+
+  </script>
+
+  <script id="theTmpl" type="text/x-handlebars-template">
+    {{#each this}}
+    <li>
+      <a href="#details" data-rel="dialog">
+        {{lastname}}, {{firstname}}
+        {{#if nickname}}
+          (<em>{{nickname}}</em>)
+        {{/if}}
+      </a>
+    </li>
+    {{/each}}
+  </script>
+
+  <script id="theEditTmpl" type="text/x-handlebars-template">
+
+  </script>
+
+  <script id="details-template" type="text/x-handlebars-template">
+    <input type="text" value="{{firstname}}" />
+    <input type="text" value="{{lastname}}" />
+    <input type="text" value="{{nickname}}" />
+  </script>
+
+  <body>
+
+    <div data-role="page" id="login" 
+      class="login-page" 
+      data-title="watsco proposal center | login">
+
+      <div data-role="header" data-position="fixed">
+        <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Home</a>
+        <h1>customers</h1>
+        <a href="#add-form" data-icon="gear" data-iconpos="notext">About</a>
+      </div>
+
+      <div data-role="content">
+        <ul id="result" 
+          data-role="listview" 
+          data-inset="true" 
+          data-filter="true"
+          data-filter-placeholder="search dudes...">
+        </ul>
+      </div>
+      
+    </div>
+
+    <div data-role="panel" data-position="left"  data-display="overlay" id="nav-panel" data-theme="a">
+
+      <ul data-role="listview">
+        <li><a href="customers.html">customers</a></li>
+        <li>
+          <a href="pending-proposals.html">pending proposals</a>
+        </li>
+        <li>
+          <a href="completed-proposals.html">completed proposals</a>
+        </li>
+      </ul>
+
+    </div>
+
+    <div id="add-form"
+      data-role="panel" 
+      data-position="right"  
+      data-display="overlay"  
+      data-theme="a">
+
+    </div>
+
+    <div data-role="page" id="details" data-title="customers | details">
+
+      <div data-role="header" data-position="fixed">
+        <h1>customers | details</h1>
+      </div>
+
+      <div id="details-container" 
+        data-role="content">
+      </div>
+      
+    </div>
+
+    <script>
+      // var displayTemplate = $.templates('#theTmpl');
+      // displayTemplate.link('#result', data);
+      var source   = $('#theTmpl').html(),
+          template = Handlebars.compile(source),
+          html    = template(data);
+      $('#result').html(html);
+
+      // var editTemplate = $.templates('#theEditTmpl');
+      // editTemplate.link('#add-form', data);
+
+      // var detailsTemplate = $.templates('#details-template');
+      // detailsTemplate.link('#details-container', data[0]);
+      var source   = $('#details-template').html(),
+          template = Handlebars.compile(source),
+          html    = template(data[0]);
+      $('#details-container').html(html);
+
+    </script>
+
+  </body>
+</html>
