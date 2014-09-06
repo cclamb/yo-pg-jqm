@@ -8,14 +8,15 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link 
       rel="stylesheet" 
-      href="styles/lib/jquery.mobile-1.4.3.css" />
+      href="bower_components/jquery-mobile-bower/css/jquery.mobile-1.4.3.css" />
     <link 
       rel="stylesheet" 
       href="styles/watsco.css">
     <!-- endbuild -->
     <!-- build:js scripts/index.js -->
-    <script src="scripts/lib/jquery-1.10.2.min.js"></script>
-    <script src="scripts/lib/jquery.mobile-1.4.3.js"></script>
+    <script src="bower_components/jquery/jquery.js"></script>
+    <script src="bower_components/jquery-mobile-bower/js/jquery.mobile-1.4.3.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
     <script src="bower_components/handlebars/handlebars.js"></script>
     <!-- endbuild -->
     <script id="panel-init">
@@ -29,11 +30,13 @@
 
     var data = [
       {
+        key: 0,
         firstname: 'Samuel',
         lastname: 'Smith',
         nickname: 'Sam'
       },
       {
+        key: 1,
         firstname: 'James',
         lastname: 'Beam',
         nickname: 'Jim'
@@ -45,7 +48,7 @@
   <script id="theTmpl" type="text/x-handlebars-template">
     {{#each this}}
     <li>
-      <a href="#details" data-rel="dialog">
+      <a href="#details" id="details-button-{{firstname}}{{lastname}}{{key}}" data-rel="dialog">
         {{lastname}}, {{firstname}}
         {{#if nickname}}
           (<em>{{nickname}}</em>)
@@ -60,9 +63,10 @@
   </script>
 
   <script id="details-template" type="text/x-handlebars-template">
-    <input type="text" value="{{firstname}}">
-    <input type="text" value="{{lastname}}">
-    <input type="text" value="{{nickname}}">
+    <input type="hidden" id="key" value="{{key}}">
+    <input type="text" id="firstname" value="{{firstname}}">
+    <input type="text" id="lastname" value="{{lastname}}">
+    <input type="text" id="nickname" value="{{nickname}}">
   </script>
 
   <body>
@@ -130,15 +134,71 @@
           html    = template(data);
       $('#result').html(html);
 
-      // var editTemplate = $.templates('#theEditTmpl');
-      // editTemplate.link('#add-form', data);
 
-      // var detailsTemplate = $.templates('#details-template');
-      // detailsTemplate.link('#details-container', data[0]);
-      var source   = $('#details-template').html(),
-          template = Handlebars.compile(source),
-          html    = template(data[0]);
-      $('#details-container').html(html);
+      $('#login').on('pageinit', function() {
+
+        console.log('PAGE: login init');
+
+        _.each(data, function(element) {
+
+          var id = '#details-button-' + element.firstname + element.lastname + element.key;
+
+          console.log('ID: ' + id);
+
+          $(id).on('click', function() {
+
+            console.log('BTN: ' + id + ' click');
+
+            var source   = $('#details-template').html(),
+                template = Handlebars.compile(source),
+                html    = template(element);
+
+            $('#details-container').html(html);
+
+            // This is required to create the correct styling.
+            // It will bind and run all the JQuery Mobile styling
+            // jhandlers, dynamicall adding clases as needed.
+            $('#details-container').trigger('create');
+
+          });
+
+        });
+
+        $('#details').on('pagebeforehide', function() {
+
+          console.log('PAGE: hiding details');
+
+          console.log('...grabbing data');
+          var firstname = $('#firstname').val();
+          var lastname = $('#lastname').val();
+          var nickname = $('#nickname').val();
+          var key = $('#key').val();
+
+          console.log(
+            '...(firstname) ' + firstname +
+            ' (lastname) ' + lastname +
+            ' (nickname) ' + nickname +
+            ' (key) ' + key
+          );
+
+          _.each(data, function(element) {
+            if (element.key == key) {
+              element.firstname = firstname;
+              element.lastname = lastname;
+              element.nickname = nickname;
+            }
+          });
+
+          var source   = $('#theTmpl').html(),
+            template = Handlebars.compile(source),
+            html    = template(data);
+          $('#result').html(html);
+
+          $('#result').trigger('create');
+
+        });
+
+      });
 
     </script>
 

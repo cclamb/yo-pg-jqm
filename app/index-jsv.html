@@ -8,14 +8,15 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link 
       rel="stylesheet" 
-      href="styles/lib/jquery.mobile-1.4.3.css" />
+      href="bower_components/jquery-mobile-bower/css/jquery.mobile-1.4.3.css" />
     <link 
       rel="stylesheet" 
       href="styles/watsco.css">
     <!-- endbuild -->
     <!-- build:js scripts/index.js -->
-    <script src="scripts/lib/jquery-1.10.2.min.js"></script>
-    <script src="scripts/lib/jquery.mobile-1.4.3.js"></script>
+    <script src="bower_components/jquery/jquery.js"></script>
+    <script src="bower_components/jquery-mobile-bower/js/jquery.mobile-1.4.3.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
     <script src="bower_components/jsviews/jsviews.js"></script>
     <!-- endbuild -->
     <script id="panel-init">
@@ -29,11 +30,13 @@
 
     var data = [
       {
+        key: 0,
         firstname: 'Samuel',
         lastname: 'Smith',
         nickname: 'Sam'
       },
       {
+        key: 1,
         firstname: 'James',
         lastname: 'Beam',
         nickname: 'Jim'
@@ -44,7 +47,7 @@
 
   <script id="theTmpl" type="text/x-jsrender">
     <li>
-      <a href="#details" data-rel="dialog">
+      <a href="#details" id="details-button-{{:firstname}}{{:lastname}}" data-rel="dialog">
         {^{:lastname}}, {^{:firstname}}
         {^{if nickname}}
           (<em data-link="nickname"></em>)
@@ -127,8 +130,37 @@
       var editTemplate = $.templates('#theEditTmpl');
       editTemplate.link('#add-form', data);
 
-      var detailsTemplate = $.templates('#details-template');
-      detailsTemplate.link('#details-container', data[0]);
+      $('#login').on('pageinit', function() {
+
+        console.log('PAGE: login init');
+
+        _.each(data, function(element) {
+
+          var id = '#details-button-' + element.firstname + element.lastname;
+
+          console.log('ID: ' + id);
+
+          $(id).on('click', function() {
+
+            console.log('BTN: ' + id + ' click');
+
+            var detailsTemplate = $.templates('#details-template');
+            detailsTemplate.link('#details-container', element);
+
+            // This is required to create the correct styling.
+            // It will bind and run all the JQuery Mobile styling
+            // jhandlers, dynamicall adding clases as needed.
+            $('#details-container').trigger('create');
+
+          });
+
+        });
+
+      });
+
+      $('#details').on('pagebeforecreate', function() {
+        console.log('PAGE: details init');
+      });
     </script>
 
   </body>
