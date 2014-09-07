@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "dependencies": {
     "jsviews": "~1.0.0-alpha",
-    "jquery-mobile": "~1.4.3",
     "handlebars": "~2.0.0",
     "jquery-mobile-bower": "~1.4.2",
     "underscore": "~1.7.0"
