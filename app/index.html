@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>watsco proposal center | login</title>
+    <meta 
+      name="viewport" 
+      content="width=device-width, initial-scale=1">
+    <!-- build:css(.tmp) styles/main.css -->
+    <link 
+      rel="stylesheet" 
+      href="bower_components/jquery-mobile-bower/css/jquery.mobile-1.4.3.css" />
+    <link 
+      rel="stylesheet" 
+      href="styles/watsco.css">
+    <!-- endbuild -->
+    <!-- build:js scripts/index.js -->
+    <script src="bower_components/jquery/jquery.js"></script>
+    <script src="bower_components/jquery-mobile-bower/js/jquery.mobile-1.4.3.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/jsviews/jsviews.js"></script>
+    <!-- endbuild -->
+    <script id="panel-init">
+      $(function () {
+        $("body>[data-role='panel']").panel().enhanceWithin();
+      });
+    </script>
+  </head>
+
+  <script>
+
+    var data = [
+      {
+        key: 0,
+        firstname: 'Samuel',
+        lastname: 'Smith',
+        nickname: 'Sam'
+      },
+      {
+        key: 1,
+        firstname: 'James',
+        lastname: 'Beam',
+        nickname: 'Jim'
+      }
+    ];
+
+  </script>
+
+  <script id="theTmpl" type="text/x-jsrender">
+    <li>
+      <a href="#details" id="details-button-{{:firstname}}{{:lastname}}" data-rel="dialog">
+        {^{:lastname}}, {^{:firstname}}
+        {^{if nickname}}
+          (<em data-link="nickname"></em>)
+        {{/if}}
+      </a>
+    </li>
+  </script>
+
+  <script id="theEditTmpl" type="text/x-jsrender">
+
+  </script>
+
+  <script id="details-template" type="text/x-jsrender">
+    <input data-link="firstname trigger=true"/>
+    <input data-link="lastname trigger=true"/>
+    <input data-link="nickname trigger=true"/>
+  </script>
+
+  <body>
+
+    <div data-role="page" id="login" 
+      class="login-page" 
+      data-title="watsco proposal center | login">
+
+      <div data-role="header" data-position="fixed">
+        <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Home</a>
+        <h1>customers</h1>
+        <a href="#add-form" data-icon="gear" data-iconpos="notext">About</a>
+      </div>
+
+      <div data-role="content">
+        <ul id="result" 
+          data-role="listview" 
+          data-inset="true" 
+          data-filter="true"
+          data-filter-placeholder="search dudes...">
+        </ul>
+      </div>
+      
+    </div>
+
+    <div data-role="page" id="details" data-title="customers | details">
+
+      <div data-role="header" data-position="fixed">
+        <h1>customers | details</h1>
+      </div>
+
+      <div id="details-container" 
+        data-role="content">
+      </div>
+      
+    </div>
+
+    <div data-role="panel" data-position="left"  data-display="overlay" id="nav-panel" data-theme="a">
+
+      <ul data-role="listview">
+        <li><a href="customers.html">customers</a></li>
+        <li>
+          <a href="pending-proposals.html">pending proposals</a>
+        </li>
+        <li>
+          <a href="completed-proposals.html">completed proposals</a>
+        </li>
+      </ul>
+
+    </div>
+
+    <div id="add-form"
+      data-role="panel" 
+      data-position="right"  
+      data-display="overlay"  
+      data-theme="a">
+
+    </div>
+
+    <script>
+      var displayTemplate = $.templates('#theTmpl');
+      displayTemplate.link('#result', data);
+
+      var editTemplate = $.templates('#theEditTmpl');
+      editTemplate.link('#add-form', data);
+
+      $('#login').on('pageinit', function() {
+
+        console.log('PAGE: login init');
+
+        _.each(data, function(element) {
+
+          var id = '#details-button-' + element.firstname + element.lastname;
+
+          console.log('ID: ' + id);
+
+          $(id).on('click', function() {
+
+            console.log('BTN: ' + id + ' click');
+
+            var detailsTemplate = $.templates('#details-template');
+            detailsTemplate.link('#details-container', element);
+
+            // This is required to create the correct styling.
+            // It will bind and run all the JQuery Mobile styling
+            // jhandlers, dynamicall adding clases as needed.
+            $('#details-container').trigger('create');
+
+          });
+
+        });
+
+      });
+
+      $('#details').on('pagebeforecreate', function() {
+        console.log('PAGE: details init');
+      });
+    </script>
+
+  </body>
+</html>
