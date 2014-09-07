@@ -194,7 +194,9 @@
             html    = template(data);
           $('#result').html(html);
 
-          $('#result').trigger('create');
+          // This is required to update the listview with
+          // the new elements.
+          $('#result').listview('refresh');
 
         });
 
