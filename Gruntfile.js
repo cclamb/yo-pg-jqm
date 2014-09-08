@@ -26,8 +26,7 @@ module.exports = function (grunt) {
 				config: 'config.xml',
 				cordova: '.cordova',
 				path: 'phonegap',
-				plugins: ['https://github.com/phonegap-build/StatusBarPlugin.git ',
-                    'https://github.com/apache/cordova-plugin-statusbar.git'],
+				plugins: [],
 				platforms: [],
 				verbose: false
 			}
@@ -60,6 +59,7 @@ module.exports = function (grunt) {
                 livereload: 35729,
                 // change this to '0.0.0.0' to access the server from outside
                 hostname: 'localhost'
+                //hostname: '0.0.0.0'
             },
             livereload: {
                 options: {

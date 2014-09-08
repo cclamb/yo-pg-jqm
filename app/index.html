@@ -8,7 +8,7 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link 
       rel="stylesheet" 
-      href="bower_components/jquery-mobile-bower/css/jquery.mobile-1.4.3.css">
+      href="styles/lib/jquery.mobile-1.4.3.css" />
     <link 
       rel="stylesheet" 
       href="styles/watsco.css">
@@ -16,6 +16,8 @@
     <!-- build:js scripts/index.js -->
     <script src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/jquery-mobile-bower/js/jquery.mobile-1.4.3.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/jsviews/jsviews.js"></script>
     <!-- endbuild -->
     <script id="panel-init">
       $(function () {
@@ -43,6 +45,27 @@
 
   </script>
 
+  <script id="theTmpl" type="text/x-jsrender">
+    <li>
+      <a href="#details" id="details-button-{{:firstname}}{{:lastname}}" data-rel="dialog">
+        {^{:lastname}}, {^{:firstname}}
+        {^{if nickname}}
+          (<em data-link="nickname"></em>)
+        {{/if}}
+      </a>
+    </li>
+  </script>
+
+  <script id="theEditTmpl" type="text/x-jsrender">
+
+  </script>
+
+  <script id="details-template" type="text/x-jsrender">
+    <input data-link="firstname trigger=true"/>
+    <input data-link="lastname trigger=true"/>
+    <input data-link="nickname trigger=true"/>
+  </script>
+
   <body>
 
     <div data-role="page" id="login" 
@@ -61,29 +84,7 @@
           data-inset="true" 
           data-filter="true"
           data-filter-placeholder="search dudes...">
-          <li>
-            <a href="#details" id="details" data-rel="dialog">
-              McKraken, Frank (<em>Franko</em>)
-            </a>
-          </li>
-          <li>
-            <a href="#details" id="details" data-rel="dialog">
-              Kinnin, Robert (<em>Bobby</em>)
-            </a>
-          </li>
         </ul>
-      </div>
-      
-    </div>
-
-    <div data-role="page" id="details" data-title="customers | details">
-
-      <div data-role="header" data-position="fixed">
-        <h1>customers | details</h1>
-      </div>
-
-      <div id="details-container" 
-        data-role="content">
       </div>
       
     </div>
@@ -109,6 +110,58 @@
       data-theme="a">
 
     </div>
+
+    <div data-role="page" id="details" data-title="customers | details">
+
+      <div data-role="header" data-position="fixed">
+        <h1>customers | details</h1>
+      </div>
+
+      <div id="details-container" 
+        data-role="content">
+      </div>
+      
+    </div>
+
+    <script>
+      var displayTemplate = $.templates('#theTmpl');
+      displayTemplate.link('#result', data);
+
+      var editTemplate = $.templates('#theEditTmpl');
+      editTemplate.link('#add-form', data);
+
+      $('#login').on('pageinit', function() {
+
+        console.log('PAGE: login init');
+
+        _.each(data, function(element) {
+
+          var id = '#details-button-' + element.firstname + element.lastname;
+
+          console.log('ID: ' + id);
+
+          $(id).on('click', function() {
+
+            console.log('BTN: ' + id + ' click');
+
+            var detailsTemplate = $.templates('#details-template');
+            detailsTemplate.link('#details-container', element);
+
+            // This is required to create the correct styling.
+            // It will bind and run all the JQuery Mobile styling
+            // jhandlers, dynamicall adding clases as needed.
+            $('#details-container').trigger('create');
+
+          });
+
+        });
+
+      });
+
+      $('#details').on('pagebeforecreate', function() {
+        console.log('PAGE: details init');
+      });
+    </script>
 
   </body>
 </html>
