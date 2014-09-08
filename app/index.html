@@ -19,9 +19,29 @@
     <script src="bower_components/underscore/underscore.js"></script>
     <script src="bower_components/jsviews/jsviews.js"></script>
     <!-- endbuild -->
+    <style>
+      #ios7statusbar {
+          width:100%;
+          height:20px;
+          background-color:white;
+          position:fixed;
+          z-index:100;
+      }
+       
+      .ios7 .ui-page {
+          margin-top: 20px;
+      }
+    </style>
     <script id="panel-init">
       $(function () {
         $("body>[data-role='panel']").panel().enhanceWithin();
+      });
+
+      $( document ).on( "pageinit", function( event ) {
+        if (navigator.userAgent.match(/(iPad|iPhone);.*CPU.*OS 7_\d/i)) {
+            $("body").addClass("ios7");
+            $('body').append('<div id="ios7statusbar"/>');
+        }
       });
     </script>
   </head>

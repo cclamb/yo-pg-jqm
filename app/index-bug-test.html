@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>jQuery Mobile issue template</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi" /> -->
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/git/jquery.mobile-git.css"> 
+  <link rel="stylesheet" href="styles/watsco.css"> 
+  <script src="http://code.jquery.com/jquery-1.11.1.js"></script> 
+  <script src="http://code.jquery.com/mobile/git/jquery.mobile-git.js"></script> 
+  <script>
+      // $(function () {
+      //   $("body>[data-role='panel']").panel().enhanceWithin();
+      // });
+  </script>
+  <style>
+    /*#edit-with-js-bin { display: none !important; }*/
+    
+  </style>
+</head>
+<body>
+  
+  <div data-role="page" id="cusomters" data-title="customers">
+
+    <div data-role="header" data-position="fixed">
+      <h1>Header</h1>
+    </div>
+
+    <div data-role="content">
+      <ul id="result" 
+          data-role="listview" 
+          data-inset="true" 
+          data-filter="true"
+          data-filter-placeholder="search dudes...">
+        <li>
+          <a href="#details" id="details">
+            McKraken, Frank (<em>Franko</em>)
+          </a>
+        </li>
+        <li>
+          <a href="#details" id="details">
+            Kinnin, Robert (<em>Bobby</em>)
+          </a>
+        </li>
+      </ul>
+    </div>
+
+<!--     <div data-role="footer" data-position="fixed">
+      <h1>footer</h1>
+    </div> -->
+
+  </div>
+
+  <div data-role="page" id="details" data-title="details">
+
+    <div data-role="header" data-position="fixed" data-add-back-btn="true">
+      <h1>Header</h1>
+    </div>
+
+    <div data-role="content">
+    <p>Details.</p.
+    </div>
+
+  </div>
+   
+</body>
+</html>
