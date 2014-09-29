@@ -58,8 +58,8 @@ module.exports = function (grunt) {
                 port: 9000,
                 livereload: 35729,
                 // change this to '0.0.0.0' to access the server from outside
-                //hostname: 'localhost'
-                hostname: '0.0.0.0'
+                hostname: 'localhost'
+                //hostname: '0.0.0.0'
             },
             livereload: {
                 options: {
@@ -262,17 +262,24 @@ module.exports = function (grunt) {
                 cwd: '<%= yeoman.app %>/styles',
                 dest: '.tmp/styles/',
                 src: '{,*/}*.css'
+            },
+            bower: {
+                expand: true,
+                dot: true,
+                cwd: '<%= yeoman.app %>/bower_components',
+                dest: '.tmp/bower_components/',
+                src: '{,*/}*.css'
             }
         },
         concurrent: {
             server: [
-                'copy:styles'
+                'copy:styles', 'copy:bower'
             ],
             test: [
-                'copy:styles'
+                'copy:styles', 'copy:bower'
             ],
             dist: [
-                'copy:styles',
+                'copy:styles', 'copy:bower',
                 'imagemin',
                 'svgmin',
                 'htmlmin'

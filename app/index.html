@@ -5,14 +5,24 @@
     <meta 
       name="viewport" 
       content="width=device-width, initial-scale=1">
-    <!-- build:css(.tmp) styles/main.css -->
+<!--     <link 
+      rel="stylesheet" 
+      href="styles/lib/jquery.mobile-1.4.3.css" /> -->
+    <!-- build:css styles/main.css -->
     <link 
       rel="stylesheet" 
-      href="styles/lib/jquery.mobile-1.4.3.css" />
+      href="bower_components/jquery-mobile-bower/css/jquery.mobile-1.4.3.css" />
     <link 
       rel="stylesheet" 
       href="styles/watsco.css">
     <!-- endbuild -->
+
+    <!-- build:css(.tmp) styles/test.css -->
+    <link 
+      rel="stylesheet" 
+      href="styles/test.css">
+    <!-- endbuild -->
+
     <!-- build:js scripts/index.js -->
     <script src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/jquery-mobile-bower/js/jquery.mobile-1.4.3.js"></script>
@@ -20,7 +30,7 @@
     <script src="bower_components/jsviews/jsviews.js"></script>
     <!-- endbuild -->
     <style>
-      #ios7statusbar {
+      /*#ios7statusbar {
           width:100%;
           height:20px;
           background-color:white;
@@ -30,19 +40,42 @@
        
       .ios7 .ui-page {
           margin-top: 20px;
+      }*/
+/*      .ios7 {
+        padding-top: 20px !important;
       }
+
+      .ios7-header-button {
+        margin-top: 20px !important;
+      }*/
     </style>
     <script id="panel-init">
       $(function () {
         $("body>[data-role='panel']").panel().enhanceWithin();
       });
 
-      $( document ).on( "pageinit", function( event ) {
-        if (navigator.userAgent.match(/(iPad|iPhone);.*CPU.*OS 7_\d/i)) {
-            $("body").addClass("ios7");
-            $('body').append('<div id="ios7statusbar"/>');
-        }
-      });
+      // function onDeviceReady() {
+      //   if (parseFloat(window.device.version) === 7.0) {
+      //     document.body.style.marginTop = "20px";
+      //   }
+      // }
+
+      //document.addEventListener('deviceready', onDeviceReady, false);
+      // $(document).on('pageinit'), function(event) {
+      //     onDeviceReady();
+      // });
+
+      // if (parseFloat(window.device.version) === 7.0) {
+      //   $('[data-role="header"]').addClass("ios7");
+      //   $('.ui-btn-left').addClass("ios7-header-button");
+      // }
+
+      // $(document).on( "pageinit", function( event ) {
+      //   if (navigator.userAgent.match(/(iPad|iPhone);.*CPU.*OS 7_\d/i)) {
+      //       $("body").addClass("ios7");
+      //       $('body').append('<div id="ios7statusbar"/>');
+      //   }
+      // });
     </script>
   </head>
 
